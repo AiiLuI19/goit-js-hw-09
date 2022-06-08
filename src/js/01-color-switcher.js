@@ -5,37 +5,31 @@ const refs = {
 }
 // Вішаємо слухача
 
-refs.btnStart.addEventListener("click", onRandomColor);
-refs.btnStop.setAttribute("disabled", true);
-let colorId = null;
+refs.btnStart.addEventListener("click", onStartRandomColor);
+refs.btnStop.addEventListener("click", onStop)
 
+let colorId = null;
 // FUNCTION
-function onRandomColor(elem) {
+function onStartRandomColor(elem) {
+    
     colorId = setInterval(() => {
         const rndColor = getRandomHexColor(elem);
              document.body.style.backgroundColor = rndColor;
-         }, 1000)
-    if (!refs.btnStart) {
-        refs.btnStart.removeAttribute("disabled");
-    }
-    refs.btnStart.setAttribute("disabled", true);
-    refs.btnStop.removeAttribute("disabled");
+    }, 1000)
+    inputDisabled(true, false);
 }
 
-refs.btnStop.addEventListener("click", () => {
-    clearInterval(colorId);
-    
-    if (refs.btnStop) {
-        refs.btnStop.removeAttribute("disabled");
-    }
-    refs.btnStop.setAttribute("disabled", true);
-    refs.btnStart.removeAttribute("disabled");
-    
-});
+function onStop() {
+    inputDisabled(false, true);
+   clearInterval(colorId);
+}
 
 function getRandomHexColor() {
   return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 }
 
-
+function inputDisabled (btnStart, btnStop) {
+  refs.btnStart.disabled = btnStart;   
+  refs.btnStop.disabled =  btnStop;
+}
 

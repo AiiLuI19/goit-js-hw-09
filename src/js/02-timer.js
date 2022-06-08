@@ -34,13 +34,12 @@ flatpickr("#datetime-picker", {
         if (!interval) {
             refs.btnStart.removeAttribute("disabled");
         }
-        
-        const { days, hours, minutes, seconds } = convertMs(ms);
-        // refs.timer.textContent = ` ${days} днів ${hours} годин ${minutes} хвилин ${seconds} секунд`;
-        refs.seconds.textContent = seconds;
-        refs.minutes.textContent = minutes;
-        refs.hours.textContent = hours;
-        refs.days.textContent = days;
+        upDate(ms);
+        // const { days, hours, minutes, seconds } = convertMs(ms);
+        // refs.seconds.textContent = seconds;
+        // refs.minutes.textContent = minutes;
+        // refs.hours.textContent = hours;
+        // refs.days.textContent = days;
         
     } else {
         if (interval !== null) {
@@ -51,6 +50,13 @@ flatpickr("#datetime-picker", {
         refs.btnStart.setAttribute("disabled", true);
      }
      
+}
+function upDate (ms) {
+     const { days, hours, minutes, seconds } = convertMs(ms);
+        refs.seconds.textContent = seconds;
+        refs.minutes.textContent = minutes;
+        refs.hours.textContent = hours;
+        refs.days.textContent = days;
 }
 // функція для запуску лічільника 
 function count() {
